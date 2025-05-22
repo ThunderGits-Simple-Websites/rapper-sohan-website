@@ -1,3 +1,4 @@
+/* Global Styles */
 * {
   margin: 0;
   padding: 0;
@@ -18,6 +19,7 @@ body {
   background-color: var(--primary);
   color: var(--text);
   overflow-x: hidden;
+  line-height: 1.6;
 }
 
 /* Preloader Animation - Rapper Style */
@@ -58,6 +60,7 @@ body {
 }
 
 .preloader h1::after {
+  
   left: auto;
   right: -30px;
 }
@@ -145,7 +148,7 @@ nav {
 }
 
 nav::before {
-  content: " ";
+  content: "";
   position: absolute;
   top: -5px;
   left: -5px;
@@ -154,16 +157,6 @@ nav::before {
   border-radius: 35px;
   background: linear-gradient(45deg, #826666, transparent, #332d2d, #32272700);
   z-index: -1;
-  /* animation: navGlow 3s linear infinite; */
-}
-
-@keyframes navGlow {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 nav ul {
@@ -293,15 +286,6 @@ nav ul li.active a {
   }
 }
 
-@keyframes shine {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
 .hero-content {
   max-width: 800px;
   z-index: 1;
@@ -316,7 +300,6 @@ nav ul li.active a {
   font-style: italic;
   animation: textGlow 2s ease infinite alternate;
   text-shadow: 2px 2px 0 var(--secondary);
-
   transform: skewY(-2deg);
   position: relative;
   display: inline-block;
@@ -344,10 +327,14 @@ nav ul li.active a {
   animation: lineGrow 3s ease infinite alternate;
 }
 
-/* @keyframes textGlow {
-            0% { text-shadow: 3px 3px 0 var(--secondary), 6px 6px 0 rgba(255, 0, 0, 0.5); }
-            100% { text-shadow: 3px 3px 0 var(--secondary), 10px 10px 15px rgba(255, 0, 0, 0.8); }
-        } */
+@keyframes textGlow {
+  0% {
+    text-shadow: 2px 2px 0 var(--secondary) ;
+  }
+  100% {
+    text-shadow: 2px 2px 0 var(--secondary);
+  }
+}
 
 @keyframes lineGrow {
   0% {
@@ -409,17 +396,6 @@ nav ul li.active a {
 
 .hero-content .btn:hover::before {
   transform: translateX(100%) rotate(45deg);
-}
-
-@keyframes slideInLeft {
-  0% {
-    transform: translateX(-100px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
 }
 
 @keyframes fadeIn {
@@ -513,11 +489,12 @@ nav ul li.active a {
   display: flex;
   justify-content: space-between;
   margin-top: 2rem;
+  gap: 1rem;
 }
 
 .stat {
   text-align: center;
-  margin-right: 2rem;
+  flex: 1;
 }
 
 .stat-num {
@@ -525,6 +502,7 @@ nav ul li.active a {
   font-weight: 700;
   color: var(--secondary);
   margin-bottom: 0.5rem;
+  display: block;
 }
 
 .stat-text {
@@ -1103,48 +1081,97 @@ footer {
   transform: translateY(-50%);
 }
 
-/* Responsive Styles */
+/* YouTube Section */
+.youtube-section {
+  padding: 8rem 10%;
+  background: #070707;
+  color: #fff;
+  text-align: center;
+}
+
+.youtube-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  max-width: 900px;
+  margin: 30px auto 0 auto;
+}
+
+.youtube-video iframe {
+  width: 100%;
+  height: 260px;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* RESPONSIVE DESIGN - Mobile First Approach */
+
+/* Large Devices (1200px and down) */
 @media (max-width: 1200px) {
   .section-title {
     font-size: 2rem;
   }
+  
   .hero-content h1 {
-    font-size: 3.5rem;
+    font-size: 4.5rem;
+  }
+  
+  .preloader h1 {
+    font-size: 4rem;
+    letter-spacing: 10px;
   }
 }
 
+/* Medium Devices (992px and down) */
 @media (max-width: 992px) {
   header {
     padding: 1.5rem 5%;
   }
+  
   .hero {
     padding: 0 5%;
   }
+  
   .about,
   .music,
   .tour,
   .gallery,
-  .contact {
+  .contact,
+  .youtube-section {
     padding: 6rem 5%;
   }
+  
   .about-content {
     flex-direction: column;
     gap: 3rem;
   }
+  
   .contact-wrapper {
     flex-direction: column;
+    gap: 3rem;
   }
+  
   .hero-content h1 {
-    font-size: 3rem;
-    padding: 0 1rem;
+    font-size: 3.5rem;
+  }
+  
+  .music-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+  
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 }
 
+/* Small Devices (768px and down) */
 @media (max-width: 768px) {
+  /* Header Navigation */
   .hamburger {
     display: block;
     font-size: 1.8rem;
   }
+  
   nav {
     position: fixed;
     top: 0;
@@ -1157,184 +1184,614 @@ footer {
     align-items: center;
     transition: var(--transition);
     z-index: 999;
+    border-radius: 0;
+    padding: 2rem;
   }
+  
   nav.active {
     right: 0;
   }
+  
   nav ul {
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
   }
+  
   nav ul li {
     margin: 1.5rem 0;
   }
+  
   nav ul li a {
     font-size: 1.3rem;
+    padding: 1rem 2rem;
+    display: block;
+    text-align: center;
   }
+  
+  /* Hero Section */
+  .hero {
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: cover;
+    min-height: 100vh;
+    padding: 0 5%;
+    text-align: center;
+  }
+  
+  .hero-content {
+    text-align: center;
+    max-width: 100%;
+  }
+  
   .hero-content h1 {
-    font-size: 2.5rem;
-    padding: 0 1rem;
+    font-size: 2.8rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
   }
+  
+  .hero-content h1::before {
+    font-size: 1.2rem;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
   .hero-content p {
     font-size: 1rem;
+    max-width: 100%;
+    text-align: center;
+    margin-bottom: 2rem;
   }
+  
+  .hero-content .btn {
+    padding: 0.8rem 2rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Section Titles */
   .section-title {
     font-size: 1.8rem;
+    margin-bottom: 3rem;
   }
+  
+  /* About Section */
+  .about-stats {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  .stat {
+    flex: 0 0 45%;
+    margin-bottom: 1.5rem;
+  }
+  
+  .stat-num {
+    font-size: 2.5rem;
+  }
+  
+  /* Music Section */
+  .music-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  /* Tour Section */
+  .tour-date {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.2rem;
+  }
+  
+  .date-left {
+    gap: 1rem;
+    width: 100%;
+  }
+  
+  .tour-btn {
+    align-self: stretch;
+    text-align: center;
+  }
+  
+  /* Gallery Section */
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  
+  .gallery-item {
+    height: 200px;
+  }
+  
+  /* Contact Section */
+  .contact-wrapper {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  /* Music Player */
   .music-player {
     padding: 1rem 5%;
     flex-wrap: wrap;
+    gap: 1rem;
   }
+  
   .player-timeline {
     order: 1;
     width: 100%;
     margin: 1rem 0;
   }
+  
   .player-volume {
+    display: none;
+  }
+  
+  .player-controls {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  /* YouTube Section */
+  .youtube-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .youtube-video iframe {
+    height: 200px;
+  }
+  
+  /* Footer */
+  .footer-links {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .footer-links li {
+    margin: 0.5rem;
+  }
+}
+
+/* Extra Small Devices (576px and down) */
+@media (max-width: 576px) {
+  /* Global Adjustments */
+  header {
+    padding: 1rem 3%;
+  }
+  
+  .logo {
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+  }
+  
+  /* Hero Section */
+  .hero {
+    background-position: center 30%;
+    background-size: cover;
+    padding: 0 3%;
+  }
+  
+  .hero-content h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 3px;
+  }
+  
+  .hero-content h1::before {
+    font-size: 1rem;
+    top: -20px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+  }
+  
+  .hero-content p {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    padding: 0 0.5rem;
+  }
+  
+  .hero-content .btn {
+    padding: 0.8rem 1.8rem;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+  }
+  
+  /* Preloader */
+  .preloader h1 {
+    font-size: 2rem;
+    letter-spacing: 8px;
+  }
+  
+  .preloader h1::before,
+  .preloader h1::after {
+    font-size: 2rem;
+    left: -20px;
+  }
+  
+  .preloader h1::after {
+    right: -20px;
+  }
+  
+  /* Sections */
+  .about,
+  .music,
+  .tour,
+  .gallery,
+  .contact,
+  .youtube-section {
+    padding: 4rem 3%;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+  }
+  
+  /* About Section */
+  .about-stats {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .stat {
+    flex: 1;
+    margin-bottom: 1rem;
+  }
+  
+  .stat-num {
+    font-size: 2rem;
+  }
+  
+  .stat-text {
+    font-size: 0.9rem;
+  }
+  
+  /* Music Section */
+  .music-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .music-card {
+    max-width: 100%;
+  }
+  
+  /* Tour Section */
+  .tour-date {
+    padding: 1rem;
+  }
+  
+  .date-day {
+    font-size: 1.5rem;
+  }
+  
+  .date-month {
+    font-size: 0.9rem;
+  }
+  
+  .tour-info h3 {
+    font-size: 1.1rem;
+  }
+  
+  .tour-info p {
+    font-size: 0.8rem;
+  }
+  
+  /* Gallery Section */
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.5rem;
+  }
+  
+  .gallery-item {
+    height: 150px;
+  }
+  
+  /* Contact Section */
+  .contact-info h3 {
+    font-size: 1.5rem;
+  }
+  
+  .contact-text {
+    font-size: 1rem;
+  }
+  
+  .form-control {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+  
+  .submit-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+  
+  /* Footer */
+  footer {
+    padding: 1.5rem 3%;
+  }
+  
+  .footer-logo {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .footer-links {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .footer-links li {
+    margin: 0.3rem 0;
+  }
+  
+  .copyright {
+    font-size: 0.8rem;
+    margin-top: 1rem;
+  }
+  
+  /* Back to Top Button */
+  .back-to-top {
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+  }
+  
+  /* Navigation Mobile Menu */
+  nav {
+    width: 85%;
+  }
+  
+  nav ul li a {
+    font-size: 1.1rem;
+    padding: 0.8rem 1.5rem;
+  }
+}
+
+/* Ultra Small Devices (480px and down) */
+@media (max-width: 480px) {
+  /* Hero Section Enhanced */
+  .hero {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.6)),
+      url("image/rapperC.jpg");
+    background-position: center 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+  }
+  
+  .hero-content h1 {
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+  }
+  
+  .hero-content h1::before {
+    font-size: 0.8rem;
+    top: -15px;
+  }
+  
+  .hero-content p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  
+  .hero-content .btn {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.75rem;
+  }
+  
+  /* Sections Ultra Mobile */
+  .about,
+  .music,
+  .tour,
+  .gallery,
+  .contact,
+  .youtube-section {
+    padding: 3rem 2%;
+  }
+  
+  .section-title {
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+  }
+  
+  /* Music Player Ultra Mobile */
+  .music-player {
+    padding: 0.8rem 2%;
+  }
+  
+  .player-img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .player-title {
+    font-size: 1rem;
+  }
+  
+  .player-artist {
+    font-size: 0.8rem;
+  }
+  
+  .player-btn {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .play-btn {
+    width: 45px;
+    height: 45px;
+  }
+  
+  /* Gallery Ultra Mobile */
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.3rem;
+  }
+  
+  .gallery-item {
+    height: 120px;
+  }
+  
+  /* Contact Ultra Mobile */
+  .contact-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .contact-icon {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+  
+  .social-links {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+/* Landscape Orientation for Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .hero {
+    height: 100vh;
+    padding: 0 5%;
+  }
+  
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-content p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .hero {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5)),
+      url("image/rapperC.jpg");
+  }
+}
+
+/* Print Styles */
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  .preloader,
+  .hamburger,
+  .back-to-top,
+  .music-player,
+  nav,
+  .hero::before,
+  .hero::after {
+    display: none !important;
+  }
+  
+  .hero {
+    background: none !important;
+    color: black !important;
+  }
+  
+  .section-title {
+    color: black !important;
+  }
+  
+  a {
+    text-decoration: underline;
+  }
+  
+  .contact-form,
+  .music-player {
     display: none;
   }
 }
 
-@media (max-width: 576px) {
-  .hero-content h1 {
-    font-size: 2rem;
-    padding: 0 1rem;
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
-  .about-stats {
-    flex-wrap: wrap;
+  
+  .preloader {
+    animation: none;
+    opacity: 0;
+    visibility: hidden;
   }
-  .stat {
-    flex: 0 0 45%;
-    margin-bottom: 1.5rem;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  :root {
+    --primary: #000;
+    --secondary: #ff0000;
+    --text: #fff;
+    --dark-accent: #666;
   }
-  .gallery-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  
+  .hero::before,
+  .hero::after {
+    display: none;
   }
-  .music-grid {
-    grid-template-columns: 1fr;
-  }
-  .date-left {
-    gap: 1rem;
-  }
+  
+  .music-card,
+  .gallery-item,
   .tour-date {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-}
-/* YouTube Section */
-
-.youtube-section {
-  padding: 40px 0;
-  background: #070707;
-  color: #fff;
-  text-align: center;
-}
-.youtube-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-  max-width: 900px;
-  margin: 30px auto 0 auto;
-}
-.youtube-video iframe {
-  width: 100%;
-  height: 260px;
-  border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
-}
-@media (max-width: 700px) {
-  .youtube-grid {
-    grid-template-columns: 1fr;
-  }
-  .youtube-video iframe {
-    height: 200px;
-  }
-}
-@media (max-width: 768px) {
-  .hero {
-    background-attachment: scroll; /* Fix for mobile devices */
-    background-position: center center;
-    background-size: cover;
-    min-height: 100vh;
-    padding: 0 5%;
-  }
-
-  .hero-content {
-    text-align: center;
-    max-width: 100%;
-  }
-
-  .hero-content h1 {
-    font-size: 2.5rem;
-    padding: 0 1rem;
-    line-height: 1.2;
-  }
-
-  .hero-content h1::before {
-    font-size: 1.2rem;
-    top: -25px;
-  }
-
-  .hero-content p {
-    font-size: 1rem;
-    max-width: 100%;
-    text-align: center;
-  }
-  .footer-links {
-    flex-direction: column;
-    justify-content: center;
-    list-style: none;
-    margin-bottom: 0.5rem;
-  }
-  .stat {
-  text-align: center;
-  margin-right: 0rem;
-}
-}
-
-@media (max-width: 576px) {
-  .hero {
-    background-position: center top;
-    background-size: cover;
-    padding: 0 3%;
-  }
-
-  .hero-content h1 {
-    font-size: 2rem;
-    padding: 0 0.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .hero-content h1::before {
-    font-size: 1rem;
-    top: -20px;
-    left: 0;
-  }
-
-  .hero-content p {
-    font-size: 0.9rem;
-    margin-bottom: 1.5rem;
-    padding: 0 0.5rem;
-  }
-
-  .hero-content .btn {
-    padding: 0.8rem 2rem;
-    font-size: 0.9rem;
+    border: 2px solid var(--secondary);
   }
 }
 
-/* Additional mobile optimization for background image */
-@media (max-width: 480px) {
-  .hero {
-    background-image: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.85),
-        rgba(0, 0, 0, 0.6)
-      ),
-      url("image/rapperC.jpg");
-    background-position: center 30%; /* Adjust this value to show the best part of your image */
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
+/* Focus Styles for Accessibility */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+.hamburger:focus {
+  outline: 2px solid var(--secondary);
+  outline-offset: 2px;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection Styles */
+::selection {
+  background: var(--secondary);
+  color: var(--text);
+}
+
+::-moz-selection {
+  background: var(--secondary);
+  color: var(--text);
 }
