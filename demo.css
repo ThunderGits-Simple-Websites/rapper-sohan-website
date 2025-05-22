@@ -1259,28 +1259,38 @@ footer {
     min-height: 100vh;
     padding: 0 5%;
   }
-  
+
   .hero-content {
     text-align: center;
     max-width: 100%;
   }
-  
+
   .hero-content h1 {
     font-size: 2.5rem;
     padding: 0 1rem;
     line-height: 1.2;
   }
-  
+
   .hero-content h1::before {
     font-size: 1.2rem;
     top: -25px;
   }
-  
+
   .hero-content p {
     font-size: 1rem;
     max-width: 100%;
     text-align: center;
   }
+  .footer-links {
+    flex-direction: column;
+    justify-content: center;
+    list-style: none;
+    margin-bottom: 0.5rem;
+  }
+  .stat {
+  text-align: center;
+  margin-right: 0rem;
+}
 }
 
 @media (max-width: 576px) {
@@ -1289,25 +1299,25 @@ footer {
     background-size: cover;
     padding: 0 3%;
   }
-  
+
   .hero-content h1 {
     font-size: 2rem;
     padding: 0 0.5rem;
     margin-bottom: 1.5rem;
   }
-  
+
   .hero-content h1::before {
     font-size: 1rem;
     top: -20px;
     left: 0;
   }
-  
+
   .hero-content p {
     font-size: 0.9rem;
     margin-bottom: 1.5rem;
     padding: 0 0.5rem;
   }
-  
+
   .hero-content .btn {
     padding: 0.8rem 2rem;
     font-size: 0.9rem;
@@ -1317,7 +1327,11 @@ footer {
 /* Additional mobile optimization for background image */
 @media (max-width: 480px) {
   .hero {
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.6)),
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.85),
+        rgba(0, 0, 0, 0.6)
+      ),
       url("image/rapperC.jpg");
     background-position: center 30%; /* Adjust this value to show the best part of your image */
     background-size: cover;
